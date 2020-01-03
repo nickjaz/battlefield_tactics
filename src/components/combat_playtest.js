@@ -58,64 +58,58 @@ export default class CombatPlaytest extends Component {
   }
 
   calculateDamage(att, def, int) {
-    let dmg = int === 'att' ? (att.power - def.armor) : (def.power - att.armor);
+    // let dmg = int === 'att' ? (att.power - def.armor) : (def.power - att.armor);
+    //
+    // if (int === 'att') {
+    //   def.health = def.health - dmg;
+    //   return def;
+    // } else {
+    //   att.health = att.health - dmg;
+    //   return att;
+    // }
+
+    let dmg = 0;
 
     if (int === 'att') {
+      let killTest = 4 + (def.armor - att.power);
+
+      for (let i = 1; i <= att.attacks; i++) {
+        console.log('defenders attack number: ', i);
+        console.log('kill test: ', killTest);
+        let roll = this.rollDice(6);
+        dmg = roll >= killTest ? dmg += 1 : dmg;
+        console.log('dice roll: ', roll);
+        console.log('damage: ', dmg);
+      }
+
       def.health = def.health - dmg;
+
+      if (def.health < 5) {
+        def.attacks = def.health;
+      }
+
       return def;
+
     } else {
+      let killTest = 4 + (att.armor - def.power);
+
+      for (let i = 1; i <= def.attacks; i++) {
+        console.log('defenders attack number: ', i);
+        console.log('kill test: ', killTest);
+        let roll = this.rollDice(6);
+        dmg = roll >= killTest ? dmg += 1 : dmg;
+        console.log('dice roll: ', roll);
+        console.log('damage: ', dmg);
+      }
+
       att.health = att.health - dmg;
+
+      if (att.health < 5) {
+        att.attacks = att.health;
+      }
+
       return att;
     }
-  }
-
-  calculateBreakTest(unit) {
-    let test = (unit.max_health / 2) - unit.health;
-    let roll = this.rollDice(6);
-
-    if (test > roll) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  calcuateVictory(win, type) {
-    let {
-      attackerWins,
-      defenderWins,
-      killWins,
-      fleeWins,
-      attackerCopy,
-      defenderCopy
-    } = this.state;
-
-    this.setState({
-      attacker: _.cloneDeep(attackerCopy),
-      defender: _.cloneDeep(defenderCopy)
-    });
-
-    if (type === 'kill') {
-      this.setState({
-        killWins: killWins += 1
-      });
-    } else if (type === 'flee') {
-      this.setState({
-        fleeWins: fleeWins += 1
-      });
-    }
-
-    if (win === 'att') {
-      this.setState({
-        attackerWins: attackerWins += 1
-      });
-    } else {
-      this.setState({
-        defenderWins: defenderWins += 1
-      });
-    }
-
-    return;
   }
 
   performCombat() {
@@ -199,6 +193,55 @@ export default class CombatPlaytest extends Component {
         });
       }
     }
+  }
+
+  calculateBreakTest(unit) {
+    let test = Math.floor((unit.max_health / 2) - unit.health);
+    let roll = this.rollDice(6);
+
+    if (test > roll) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  calcuateVictory(win, type) {
+    let {
+      attackerWins,
+      defenderWins,
+      killWins,
+      fleeWins,
+      attackerCopy,
+      defenderCopy
+    } = this.state;
+
+    this.setState({
+      attacker: _.cloneDeep(attackerCopy),
+      defender: _.cloneDeep(defenderCopy)
+    });
+
+    if (type === 'kill') {
+      this.setState({
+        killWins: killWins += 1
+      });
+    } else if (type === 'flee') {
+      this.setState({
+        fleeWins: fleeWins += 1
+      });
+    }
+
+    if (win === 'att') {
+      this.setState({
+        attackerWins: attackerWins += 1
+      });
+    } else {
+      this.setState({
+        defenderWins: defenderWins += 1
+      });
+    }
+
+    return;
   }
 
   resetBattle() {

@@ -3,5 +3,5 @@ export const tightFormation = function(unit, att) {
     return unit.armor += 1;
   } else {
     return;
-  };
+  }
 };

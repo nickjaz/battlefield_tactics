@@ -8,8 +8,8 @@ export default class TerrainCard extends Component {
   render() {
     return(
       <div className="terrain-card container">
-        
+        <div>This works</div>
       </div>
-    )
+    );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TerrainCard from './terrain_card.js';
+// import TerrainCard from './terrain_card.js';
 import _ from 'lodash';
 import terrainList from '../lib/terrain_list';
 
@@ -33,7 +33,7 @@ export default class TerrainPlaytest extends Component {
     terrainArr.push(terrainIdx);
     this.setState({
       terrainArr
-    }, console.log(this.state.terrainArr));
+    });
   }
 
   render() {

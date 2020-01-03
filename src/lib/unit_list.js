@@ -4,10 +4,12 @@ const unitList = [
     faction: 'order',
     type: 'infantry',
     class: 'axe',
-    max_health: 10,
-    health: 10,
+    ranks: 3,
+    max_health: 15,
+    health: 15,
+    attacks: 5,
     base_power: 4,
-    base_armor: 0,
+    base_armor: 2,
     base_initiative: 3
   },
   {
@@ -15,10 +17,12 @@ const unitList = [
     faction: 'order',
     type: 'infantry',
     class: 'spear',
-    max_health: 10,
-    health: 10,
+    ranks: 3,
+    max_health: 15,
+    health: 15,
+    attacks: 5,
     base_power: 3,
-    base_armor: 1,
+    base_armor: 3,
     base_initiative: 3
   },
   {
@@ -26,10 +30,12 @@ const unitList = [
     faction: 'order',
     type: 'infantry',
     class: 'sword',
-    max_health: 10,
-    health: 10,
+    ranks: 3,
+    max_health: 15,
+    health: 15,
+    attacks: 5,
     base_power: 3,
-    base_armor: 1,
+    base_armor: 3,
     base_initiative: 3
   }
 ];

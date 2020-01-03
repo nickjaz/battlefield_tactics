@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Header from './header.js';
 import CombatPlaytest from './combat_playtest.js';
 import TerrainPlaytest from './terrain_playtest.js';
